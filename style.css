@@ -1,146 +1,154 @@
 :root {
-    --bg-app: #09090e;
-    --bg-surface: #11111a;
-    --bg-card: #171725;
-    --border: #26263b;
-    --text: #f8fafc;
-    --text-muted: #64748b;
-    --purple: #8b5cf6;
-    --purple-hover: #a78bfa;
-    --red: #ef4444;
-    --green: #10b981;
+    --bg-workspace: #07070a;
+    --bg-sub: #0d0d14;
+    --bg-card: #13131f;
+    --border: #222235;
+    --text: #f1f5f9;
+    --text-dark: #475569;
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --red: #dc2626;
+    --green: #16a34a;
+    --amber: #d97706;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--bg-app);
+    background-color: var(--bg-workspace);
     color: var(--text);
     font-family: system-ui, -apple-system, sans-serif;
     height: 100vh;
     overflow: hidden;
 }
 
-/* GRID PRINCIPAL DO APP DE 3 COLUNAS */
-.app-grid {
+/* WORKSPACE EM 4 COLUNAS */
+.app-workspace {
     display: grid;
-    grid-template-columns: 280px 1fr 280px;
+    grid-template-columns: 260px 1fr 280px 240px;
     height: 100vh;
-    background-color: var(--bg-app);
 }
 
-/* PAINÉIS LATERAIS E CENTRAL */
-.sidebar-painel, .soundboard-painel {
-    background-color: var(--bg-surface);
+.coluna-painel {
+    background-color: var(--bg-sub);
     border-right: 1px solid var(--border);
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     overflow-y: auto;
 }
 
-.soundboard-painel {
-    border-right: none;
-    border-left: 1px solid var(--border);
-}
+.coluna-painel:last-child { border-right: none; border-left: 1px solid var(--border); }
 
-.main-content {
-    padding: 30px;
+.coluna-central {
+    padding: 25px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
 
-/* COMPONENTES DE CARDS */
+/* CARDS E GRIDS CONTEXTUAIS */
 .card {
     background-color: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 6px;
+    padding: 14px;
 }
 
 .card h3 {
-    font-size: 0.95rem;
-    color: var(--text-muted);
+    font-size: 0.8rem;
+    color: var(--text-dark);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 15px;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
 }
 
 .fixed-card { flex-grow: 1; display: flex; flex-direction: column; }
 textarea {
-    width: 100%;
-    flex-grow: 1;
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 10px;
-    border-radius: 6px;
-    resize: none;
-    font-size: 0.9rem;
-    outline: none;
+    width: 100%; flex-grow: 1; background: var(--bg-sub); border: 1px solid var(--border);
+    color: var(--text); padding: 10px; border-radius: 4px; resize: none; font-size: 0.85rem; outline: none;
 }
-textarea:focus { border-color: var(--purple); }
 
-/* ENTRADAS DE DADOS (INPUT FLUTUANTE) */
-.form-grupo { display: flex; flex-direction: column; gap: 14px; }
-.input-row { display: flex; gap: 10px; }
-
+/* INTERFACE DE ENTRADA */
+.form-grupo { display: flex; flex-direction: column; gap: 10px; }
+.input-row { display: flex; gap: 8px; }
 .input-field { position: relative; width: 100%; }
 .input-field input {
-    width: 100%; padding: 12px; background: var(--bg-surface);
-    border: 1px solid var(--border); border-radius: 6px; color: #fff; outline: none;
+    width: 100%; padding: 10px; background: var(--bg-sub);
+    border: 1px solid var(--border); border-radius: 4px; color: #fff; outline: none; font-size: 0.9rem;
 }
 .input-field label {
-    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-    color: var(--text-muted); pointer-events: none; transition: 0.2s ease; font-size: 0.9rem;
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    color: var(--text-dark); pointer-events: none; transition: 0.15s; font-size: 0.85rem;
 }
 .input-field input:focus ~ label, .input-field input:not(:placeholder-shown) ~ label {
-    top: -6px; left: 8px; font-size: 0.75rem; background: var(--bg-card); padding: 0 4px; color: var(--purple);
+    top: -5px; left: 6px; font-size: 0.7rem; background: var(--bg-card); padding: 0 3px; color: var(--purple);
 }
 
-/* BOTÕES */
-.btn-primary {
-    background: var(--purple); color: #fff; border: none; padding: 12px;
-    border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s;
+.select-rpg {
+    flex: 1; background: var(--bg-sub); border: 1px solid var(--border);
+    color: var(--text); border-radius: 4px; padding: 8px; outline: none;
 }
-.btn-primary:hover { background: var(--purple-hover); }
 
-.btn-danger-outline {
-    background: transparent; border: 1px solid var(--red); color: var(--red);
-    padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: 0.2s;
-}
+/* BOTÕES GERAIS */
+.btn-primary { background: var(--purple); color: #fff; border: none; padding: 10px; border-radius: 4px; font-weight: 600; cursor: pointer; }
+.btn-primary:hover { background: var(--purple-light); }
+.btn-success { background: var(--green); color: #fff; border: none; padding: 8px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; }
+.btn-danger-outline { background: transparent; border: 1px solid var(--red); color: var(--red); padding: 8px 12px; border-radius: 4px; cursor: pointer; }
 .btn-danger-outline:hover { background: var(--red); color: #fff; }
 
-.grid-botoes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.btn-clima, .btn-sound {
-    background: var(--bg-surface); border: 1px solid var(--border); color: var(--text);
-    padding: 10px; border-radius: 6px; cursor: pointer; text-align: left; font-size: 0.85rem;
+/* RECURSO: TORRE DE DADOS E UTILS */
+.grid-dados { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.btn-dado {
+    background: var(--bg-sub); border: 1px solid var(--border); color: var(--text);
+    padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-family: monospace;
 }
-.btn-clima:hover, .btn-sound:hover { border-color: var(--purple); background: var(--bg-app); }
-.btn-clima.ativo { background: var(--purple); border-color: var(--purple); }
+.btn-dado.premium { border-color: var(--amber); color: var(--amber); }
+.resultado-dado {
+    margin-top: 10px; background: var(--bg-sub); padding: 8px; border-radius: 4px;
+    text-align: center; font-family: monospace; font-size: 0.9rem; color: var(--purple-light); border: 1px dashed var(--border);
+}
 
-/* INTERFACE DO TRACKER CENTRAL */
-.main-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px;
+.resultado-loot {
+    margin-top: 10px; font-size: 0.85rem; color: #a1a1aa; line-height: 1.4;
+    background: var(--bg-sub); padding: 8px; border-radius: 4px; min-height: 60px;
 }
-.lista-combate { display: flex; flex-direction: column; gap: 12px; }
+
+.grid-botoes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.lista-vertical-botoes { display: flex; flex-direction: column; gap: 8px; }
+.btn-clima, .btn-sound {
+    background: var(--bg-sub); border: 1px solid var(--border); color: var(--text);
+    padding: 8px; border-radius: 4px; cursor: pointer; text-align: left; font-size: 0.8rem;
+}
+.btn-clima.ativo { background: var(--purple); }
+
+/* SISTEMA TRACKER CENTRAL DE COMBATE */
+.main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+.acoes-header { display: flex; gap: 10px; }
+.lista-combate { display: flex; flex-direction: column; gap: 10px; }
 
 .card-personagem {
     display: flex; justify-content: space-between; align-items: center;
-    background: var(--bg-card); border: 1px solid var(--border);
-    padding: 18px; border-radius: 8px; border-left: 5px solid var(--purple);
+    background: var(--bg-card); border: 1px solid var(--border); padding: 14px; border-radius: 6px;
+    border-left: 5px solid var(--purple); transition: 0.2s;
 }
 .card-personagem.monstro { border-left-color: var(--red); }
-.card-personagem.morto { opacity: 0.4; border-left-color: var(--text-muted); }
+.card-personagem.morto { opacity: 0.35; }
+.card-personagem.ativo-turno { box-shadow: 0 0 12px rgba(124, 58, 237, 0.4); border-top: 1px solid var(--purple-light); }
 
-.controles-hp { display: flex; align-items: center; gap: 8px; }
-.hp-display { font-family: monospace; font-size: 1.1rem; font-weight: bold; min-width: 90px; text-align: center; }
-.btn-hp {
-    border: none; color: #fff; width: 32px; height: 32px; border-radius: 6px;
-    font-weight: bold; cursor: pointer;
-}
+.controles-hp { display: flex; align-items: center; gap: 6px; }
+.hp-display { font-family: monospace; font-size: 1rem; font-weight: bold; min-width: 80px; text-align: center; }
+.btn-hp { border: none; color: #fff; width: 28px; height: 28px; border-radius: 4px; font-weight: bold; cursor: pointer; }
 .btn-hp.minus { background: var(--red); }
 .btn-hp.plus { background: var(--green); }
+
+/* SELETOR DE CONDIÇÕES */
+.select-condicao {
+    background: var(--bg-sub); border: 1px solid var(--border); color: #fff;
+    padding: 4px; border-radius: 4px; font-size: 0.75rem; outline: none; margin-top: 6px; display: block;
+}
+.badge-condicao {
+    display: inline-block; background: var(--amber); color: #000; font-size: 0.7srem;
+    font-weight: bold; padding: 2px 6px; border-radius: 3px; margin-top: 4px; margin-right: 4px;
+}

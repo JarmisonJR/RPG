@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technician DM - Painel Profissional de RPG</title>
+    <title>DM OS - Sistema Operacional do Mestre</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="app-grid">
+    <div class="app-workspace">
         
-        <!-- COLUNA 1: ADICIONAR & STATUS DO SISTEMA -->
-        <aside class="sidebar-painel">
+        <aside class="coluna-painel">
             <div class="card">
-                <h3>+ Novo Combatente</h3>
+                <h3>+ Adicionar à Mesa</h3>
                 <div class="form-grupo">
                     <div class="input-field">
                         <input type="text" id="nome" required placeholder=" ">
-                        <label>Nome do Personagem</label>
+                        <label>Nome da Criatura</label>
                     </div>
                     <div class="input-row">
                         <div class="input-field">
@@ -29,61 +28,85 @@
                             <label>HP Máximo</label>
                         </div>
                     </div>
-                    <button id="btnAdicionar" class="btn-primary">Inserir na Mesa</button>
+                    <button id="btnAdicionar" class="btn-primary">Colocar em Jogo</button>
                 </div>
             </div>
 
-            <!-- CARD DE NOTAS RÁPIDAS DO MESTRE -->
-            <div class="card fixed-card">
-                <h3>Notas do Cenário</h3>
-                <textarea id="notasMestre" placeholder="Pistas, segredos, nomes de NPCs reservas... (Salva automaticamente)"></textarea>
+            <div class="card">
+                <h3>Torre de Dados</h3>
+                <div class="grid-dados">
+                    <button class="btn-dado" onclick="rolarDado(4)">d4</button>
+                    <button class="btn-dado" onclick="rolarDado(6)">d6</button>
+                    <button class="btn-dado" onclick="rolarDado(8)">d8</button>
+                    <button class="btn-dado" onclick="rolarDado(10)">d10</button>
+                    <button class="btn-dado" onclick="rolarDado(12)">d12</button>
+                    <button class="btn-dado premium" onclick="rolarDado(20)">d20</button>
+                </div>
+                <div id="resultadoDado" class="resultado-dado">Aguardando rolagem...</div>
             </div>
         </aside>
 
-        <!-- COLUNA 2: CENTRAL DO COMBATE (TRACKER) -->
-        <main class="main-content">
+        <main class="coluna-central">
             <header class="main-header">
-                <h2>Ordem de Iniciativa Ativa</h2>
-                <div class="controles-sessao">
-                    <button onclick="limparMesa()" class="btn-danger-outline">Resetar Combate</button>
+                <div>
+                    <h2>Ordem de Combate Ativa</h2>
+                    <p id="contadorRodada">Rodada Atual: 1</p>
+                </div>
+                <div class="acoes-header">
+                    <button onclick="proximaRodada()" class="btn-success">Próximo Turno</button>
+                    <button onclick="limparMesa()" class="btn-danger-outline">Resetar</button>
                 </div>
             </header>
             
             <div id="listaCombate" class="lista-combate">
-                <!-- Cards Dinâmicos -->
-            </div>
+                </div>
         </main>
 
-        <!-- COLUNA 3: CONTROLE DE AMBIENTAÇÃO (SOUNDBOARD) -->
-        <section class="soundboard-painel">
+        <section class="coluna-painel">
             <div class="card">
-                <h3>Clima & Iluminação</h3>
-                <div class="grid-botoes">
-                    <button class="btn-clima" onclick="mudarClima('chuva')">🌧️ Chuva</button>
-                    <button class="btn-clima" onclick="mudarClima('caverna')">⛰️ Caverna</button>
-                    <button class="btn-clima" onclick="mudarClima('fogo')">🔥 Inferno/Fogo</button>
-                    <button class="btn-clima limpo" onclick="mudarClima('limpo')">☀️ Parar Efeitos</button>
+                <h3>Gerador de Tesouro (Loot)</h3>
+                <div class="input-row">
+                    <select id="nivelMonstro" class="select-rpg">
+                        <option value="nd1">Nível 1 - 4 (Fácil)</option>
+                        <option value="nd5">Nível 5 - 10 (Médio)</option>
+                        <option value="nd11">Nível 11+ (Lendário)</option>
+                    </select>
+                    <button onclick="gerarLoot()" class="btn-primary" style="padding:0 10px;">Gerar</button>
+                </div>
+                <div id="caixaTesouro" class="resultado-loot">Clique em gerar para saquear...</div>
+            </div>
+
+            <div class="card fixed-card">
+                <h3>Diário da Sessão</h3>
+                <textarea id="notasMestre" placeholder="Histórico, pistas ocultas e lore atualizados em tempo real..."></textarea>
+            </div>
+        </section>
+
+        <section class="coluna-painel">
+            <div class="card">
+                <h3>Clima de Fundo</h3>
+                <div class="lista-vertical-botoes">
+                    <button class="btn-clima" onclick="mudarClima('chuva')">🌧️ Tempestade Pesada</button>
+                    <button class="btn-clima" onclick="mudarClima('caverna')">⛰️ Masmorra / Eco</button>
+                    <button class="btn-clima limpo" onclick="mudarClima('limpo')">☀️ Parar Clima</button>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Efeitos Sonoros Rápidos</h3>
+                <h3>Efeitos de Impacto</h3>
                 <div class="grid-botoes">
-                    <button class="btn-sound" onclick="tocarSom('espada')">⚔️ Ataque Espada</button>
-                    <button class="btn-sound" onclick="tocarSom('magia')">🔮 Feitiço/Magia</button>
+                    <button class="btn-sound" onclick="tocarSom('espada')">⚔️ Lâmina</button>
+                    <button class="btn-sound" onclick="tocarSom('magia')">🔮 Feitiço</button>
                     <button class="btn-sound" onclick="tocarSom('monstro')">👹 Rugido</button>
-                    <button class="btn-sound" onclick="tocarSom('moedas')">🪙 Ouro/Tesouro</button>
+                    <button class="btn-sound" onclick="tocarSom('moedas')">🪙 Moedas</button>
                 </div>
             </div>
         </section>
 
     </div>
 
-    <!-- Tags de áudio ocultas para controle de efeitos e loops ambiente -->
     <audio id="audio-chuva" loop src="https://assets.mixkit.co/active_storage/sfx/2448/2448-84.wav"></audio>
-    <audio id="audio-caverna" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio> <!-- Exemplo de trilha gótica de fundo -->
-    
-    <!-- Efeitos sonoros isolados -->
+    <audio id="audio-caverna" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
     <audio id="audio-espada" src="https://assets.mixkit.co/active_storage/sfx/2809/2809-84.wav"></audio>
     <audio id="audio-magia" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav"></audio>
     <audio id="audio-monstro" src="https://assets.mixkit.co/active_storage/sfx/2323/2323-84.wav"></audio>

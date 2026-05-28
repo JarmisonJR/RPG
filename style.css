@@ -1,0 +1,231 @@
+
+/* ==========================================================================
+   VARIÁVEIS DE AMBIENTE (DESIGN SYSTEM)
+   ========================================================================== */
+:root {
+    --bg-main: #0f0f15;
+    --bg-card: #161622;
+    --bg-input: #1a1a26;
+    
+    --text-primary: #f1f5f9;
+    --text-muted: #64748b;
+    --accent: #a855f7;
+    --accent-hover: #bc77ff;
+    
+    --color-hero: #3b82f6;
+    --color-monster: #ef4444;
+    --color-heal: #10b981;
+    
+    --border-color: #27273a;
+    --radius: 8px;
+    --transition: all 0.2s ease-in-out;
+}
+
+/* ==========================================================================
+   RESETS E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+/* ==========================================================================
+   COMPONENTES DO DASHBOARD
+   ========================================================================== */
+.dashboard-container {
+    width: 100%;
+    max-width: 680px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.dashboard-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+}
+
+.dashboard-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* FORMULÁRIO COM INPUT LABELS FLUTUANTES */
+.form-cadastro {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.input-field {
+    position: relative;
+    flex: 2;
+    min-width: 180px;
+}
+
+.input-field.max-sm {
+    flex: 1;
+    min-width: 80px;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    outline: none;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.input-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+/* Animação do Label Flutuante */
+.input-field label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.input-field input:focus ~ label,
+.input-field input:not(:placeholder-shown) ~ label {
+    top: -8px;
+    left: 8px;
+    font-size: 0.75rem;
+    background-color: var(--bg-card);
+    padding: 0 4px;
+    color: var(--accent);
+}
+
+.btn-action {
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    padding: 0 24px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-action:hover {
+    background-color: var(--accent-hover);
+}
+
+/* ==========================================================================
+   LISTAGEM DINÂMICA (CARDS DE COMBATE)
+   ========================================================================== */
+.lista-combate {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-personagem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-main);
+    padding: 16px;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--color-hero);
+    border: 1px solid var(--border-color);
+    border-left-width: 5px;
+    transition: var(--transition);
+}
+
+.card-personagem.monstro {
+    border-left-color: var(--color-monster);
+}
+
+.info-nome {
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.3px;
+}
+
+.info-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* CONTROLES DE PONTOS DE VIDA */
+.controles-hp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hp-display {
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    min-width: 85px;
+    text-align: center;
+}
+
+.btn-hp {
+    border: none;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+.btn-hp.dano { background-color: var(--color-monster); }
+.btn-hp.dano:hover { filter: brightness(1.2); }
+
+.btn-hp.cura { background-color: var(--color-heal); }
+.btn-hp.cura:hover { filter: brightness(1.2); }
+
+.btn-remover {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px 8px;
+    transition: var(--transition);
+}
+
+.btn-remover:hover {
+    color: var(--color-monster);
+    transform: scale(1.1);
+}

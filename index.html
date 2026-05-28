@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Mestre - Tracker de Combate</title>
+    <!-- Vinculando o arquivo de estilização externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h2>Tracker de Iniciativa</h2>
+            <p>Gerenciamento de turnos e combate em tempo real</p>
+        </header>
+        
+        <!-- Formulário de Entrada de Criaturas -->
+        <section class="form-cadastro">
+            <div class="input-field">
+                <input type="text" id="nome" required placeholder=" ">
+                <label for="nome">Nome do Personagem / Monstro</label>
+            </div>
+            
+            <div class="input-field max-sm">
+                <input type="number" id="iniciativa" required placeholder=" ">
+                <label for="iniciativa">Iniciativa</label>
+            </div>
+            
+            <div class="input-field max-sm">
+                <input type="number" id="hp" required placeholder=" ">
+                <label for="hp">HP Máximo</label>
+            </div>
+            
+            <button id="btnAdicionar" class="btn-action" title="Adicionar ao combate">
+                Adicionar
+            </button>
+        </section>
+
+        <!-- Container Dinâmico da Lista -->
+        <section id="listaCombate" class="lista-combate">
+            <!-- Os cards gerados pelo JavaScript entrarão aqui -->
+        </section>
+    </main>
+
+    <!-- Vinculando o arquivo de lógica externa -->
+    <script src="app.js"></script>
+</body>
+</html>
